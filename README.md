@@ -11,11 +11,7 @@ Collect your recipes in the RecipeJS app online.
 ````
 # Clone repo
 git clone https://github.com/victorkane/recipe-js.git
-cd recipe-js-app/
-
-# Create local branch of the lesson and section
-#  you are interested in reviewing and running
-git checkout --track origin/lesson01-02
+cd recipe-js/
 
 # Provision static server
 npm install
