@@ -19,7 +19,11 @@ npm install
 # Run server
 node server.js
 
-# Change to a new lesson and run static server
-git checkout origin/lesson-01-03
+# Change to a branch lesson locally for the first time and run static server
+git checkout --track origin/lesson01-01
+node server.js
+
+# Change to an already downloaded branch
+git checkout lesson01-03
 node server.js
 ````
