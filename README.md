@@ -10,7 +10,7 @@ Collect your recipes in the RecipeJS app online.
 
 ````
 # Clone repo
-git clone https://github.com/victorkane/recipe-js-app.git
+git clone https://github.com/victorkane/recipe-js.git
 cd recipe-js-app/
 
 # Create local branch of the lesson and section
