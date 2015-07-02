@@ -1,33 +1,15 @@
 <html ng-app="recipeJSApp">
 <head>
   <title>RecipeJS</title>
-  <style>
-    .recipe {padding-left: 30px;}
-    .new {background-image: url("images/new.gif"); background-repeat: no-repeat;}
-
-  </style>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body ng-controller="RecipeVM as recipevm">
-  <h2>{{recipevm.message}} {{recipevm.titletext}} {{recipevm.edition}} Edition</h1>
-  <h3>Today's Recipe Recommendations</h3>
-  <div class="recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
-    <span class="title">{{recipe.title}}</span>
+  <h2 class="ng-cloak">{{recipevm.message}} {{recipevm.titletext}} {{recipevm.edition}} Edition</h1>
+  <h3 class="ng-cloak">Today's Recipe Recommendations</h3>
+  <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
+    <span ng-bind="recipe.title" class="title"></span>
   </div>
-
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.js"></script>
-  <script type="text/javascript">
-    angular.module('recipeJSApp', [])
-      .controller('RecipeVM', [function() {
-      var vm = this;
-      vm.message = 'Welcome to';
-      vm.titletext = 'RecipeJS';
-      vm.edition = 'First';
-      vm.recipes = [
-        {title: "Baked Beans on Toast", new: true},
-        {title: "French Toast", new: false},
-        {title: "Rocky Mountain Egg", new: false},
-      ];
-    }]);
-  </script>
+  <script src="js/recipevm-controller.js"></script>
 </body>
 </html>
