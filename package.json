@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Collect your recipes in the RecipeJS app online.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/victorkane/recipe-js-app.git"
+  },
+  "author": "Victor Kane",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/victorkane/recipe-js-app/issues"
+  },
+  "homepage": "https://github.com/victorkane/recipe-js-app",
+  "dependencies": {
+    "express": "^4.13.0",
+    "morgan": "^1.6.0",
+    "serve-static": "^1.10.0"
+  }
+}
