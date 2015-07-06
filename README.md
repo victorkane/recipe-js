@@ -45,3 +45,9 @@ node server.js
 ````
 
 ## Instructions for performing the local testing for each lesson's code
+
+````
+# Install testing dependencies locally and start karma
+bower install
+karma start
+````
