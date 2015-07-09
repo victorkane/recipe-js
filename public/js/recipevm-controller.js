@@ -9,5 +9,7 @@ angular.module('recipeJSApp', [])
     {title: "French Toast", new: false},
     {title: "Rocky Mountain Egg", new: false},
   ];
-  vm.username = '';
+  vm.submit = function() {
+    console.log('User signed in: ', vm.user)
+  };
 }]);

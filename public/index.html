@@ -4,8 +4,16 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body ng-controller="RecipeVM as recipevm">
-  <h2 class="ng-cloak">{{recipevm.message}} {{recipevm.username || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
-  <span class="label">Sign in: </span><input type="text" ng-model="recipevm.username"/>
+  <h2 class="ng-cloak">{{recipevm.message}} {{recipevm.user.name || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
+
+  <form ng-submit="recipevm.submit()">
+    <span class="label">Name: </span>
+    <input type="text" ng-model="recipevm.user.name">
+    <span class="label">Password: </span>
+    <input type="password" ng-model="recipevm.user.password">
+    <input type="submit" value="Sign in">
+  </form>
+
   <h3 class="ng-cloak">Today's Recipe Recommendations</h3>
   <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
     <span ng-bind="recipe.title" class="title"></span>
