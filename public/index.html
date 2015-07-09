@@ -6,12 +6,14 @@
 <body ng-controller="RecipeVM as recipevm">
   <h2 class="ng-cloak">{{recipevm.message}} {{recipevm.user.name || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
 
-  <form ng-submit="recipevm.submit()">
+  <form ng-submit="recipevm.submit()" name="signInForm">
     <span class="label">Name: </span>
-    <input type="text" ng-model="recipevm.user.name">
+    <input type="text" ng-model="recipevm.user.name" required ng-minlength="4">
+    <span class="label">Email: </span>
+    <input type="email" ng-model="recipevm.user.email" ng-pattern="emailFormat">
     <span class="label">Password: </span>
-    <input type="password" ng-model="recipevm.user.password">
-    <input type="submit" value="Sign in">
+    <input type="password" ng-model="recipevm.user.password" required>
+    <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
   </form>
 
   <h3 class="ng-cloak">Today's Recipe Recommendations</h3>

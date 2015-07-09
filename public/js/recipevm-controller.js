@@ -9,6 +9,7 @@ angular.module('recipeJSApp', [])
     {title: "French Toast", new: false},
     {title: "Rocky Mountain Egg", new: false},
   ];
+  vm.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
   vm.submit = function() {
     console.log('User signed in: ', vm.user)
   };
