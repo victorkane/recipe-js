@@ -6,5 +6,8 @@
   display: none !important;
 }
 
+h2.title {
+  padding: 0 1em;
+}
 .recipe {padding-left: 30px;}
 .new {background-image: url("../images/new.gif"); background-repeat: no-repeat;}
