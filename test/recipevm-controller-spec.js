@@ -25,4 +25,11 @@ describe('Controller: RecipeVM', function() {
     ]);
   });
 
+  it("should have no user model defined upon initial load", function() {
+     expect(ctrl.user).toBeFalsy();
+  });
+
+  it("should have an email format defined for email validation upon initial load", function() {
+     expect(ctrl.emailFormat).not.toBeNull();
+  });
 });
