@@ -11,9 +11,9 @@
       <div class="col-sm-6">
         <h2 class="ng-cloak title">{{headervm.message}} {{headervm.user.name || 'stranger'}} to {{headervm.titletext}} {{headervm.edition}} Edition</h2>
       </div>
-      <div class="col-sm-4 col-sm-offset-2" ng-controller="ControllerRecipe as recipevm1">
+      <div class="col-sm-4 col-sm-offset-2" ng-controller="ControllerRecipe as recipevm">
         <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
-        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm1.recipes" ng-class="recipe.new ? 'new' : 'old'">
+        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
           <span ng-bind="recipe.title" class="title"></span>
         </div>
       </div>
@@ -40,9 +40,9 @@
           <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
         </form>
       </div>
-      <div class="col-sm-6 col-sm-offset-1" ng-controller="ControllerRecipe as recipevm2">
+      <div class="col-sm-6 col-sm-offset-1" ng-controller="ControllerRecipe as recipevm">
         <h3>Let's eat!</h3>
-        <ul class="ng-cloak recipe" ng-repeat="recipe in recipevm2.recipes">
+        <ul class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes">
           <li ng-bind="recipe.title" class="title"></li>
         </ul>
       </div>
