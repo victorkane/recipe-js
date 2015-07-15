@@ -7,11 +7,19 @@
 </head>
 <body ng-controller="RecipeVM as recipevm">
   <div class="container-fluid">
-    <div class="jumbotron">
-      <h2 class="ng-cloak title">{{recipevm.message}} {{recipevm.user.name || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
+    <div class="jumbotron container">
+      <div class="col-sm-6">
+        <h2 class="ng-cloak title">{{recipevm.message}} {{recipevm.user.name || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
+      </div>
+      <div class="col-sm-4 col-sm-offset-2">
+        <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
+        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
+          <span ng-bind="recipe.title" class="title"></span>
+        </div>
+      </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-4 col-sm-offset-1">
         <form ng-submit="recipevm.submit()" name="signInForm" class="" role="form">
           <div class="form-group">
             <input type="text" name="username" class="form-control" ng-model="recipevm.user.name" required ng-minlength="4" placeholder="Name">
@@ -32,11 +40,11 @@
           <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
         </form>
       </div>
-      <div class="col-sm-6 "
-        <h3 class="ng-cloak">Today's Recipe Recommendations</h3>
-        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
-          <span ng-bind="recipe.title" class="title"></span>
-        </div>
+      <div class="col-sm-6 col-sm-offset-1">
+        <h3>Let's eat!</h3>
+        <ul class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes">
+          <li ng-bind="recipe.title" class="title"></li>
+        </ul>
       </div>
     </div>
   </div>
