@@ -5,44 +5,44 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body ng-controller="RecipeVM as recipevm">
+<body>
   <div class="container-fluid">
-    <div class="jumbotron container">
+    <div ng-controller="ControllerHeader as headervm" class="jumbotron container">
       <div class="col-sm-6">
-        <h2 class="ng-cloak title">{{recipevm.message}} {{recipevm.user.name || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
+        <h2 class="ng-cloak title">{{headervm.message}} {{headervm.user.name || 'stranger'}} to {{headervm.titletext}} {{headervm.edition}} Edition</h2>
       </div>
-      <div class="col-sm-4 col-sm-offset-2">
+      <div class="col-sm-4 col-sm-offset-2" ng-controller="ControllerRecipe as recipevm1">
         <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
-        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
+        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm1.recipes" ng-class="recipe.new ? 'new' : 'old'">
           <span ng-bind="recipe.title" class="title"></span>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-1">
-        <form ng-submit="recipevm.submit()" name="signInForm" class="" role="form">
+      <div class="col-sm-4 col-sm-offset-1" ng-controller="ControllerUser as uservm">
+        <form ng-submit="uservm.submit()" name="signInForm" class="" role="form">
           <div class="form-group">
-            <input type="text" name="username" class="form-control" ng-model="recipevm.user.name" required ng-minlength="4" placeholder="Name">
+            <input type="text" name="username" class="form-control" ng-model="uservm.user.name" required ng-minlength="4" placeholder="Name">
             <span ng-show="signInForm.username.$error.required">Required field</span>
             <span ng-show="signInForm.username.$error.minlength">Name should contain at least four characters</span>
           </div>
 
           <div class="form-group">
-            <input type="email" name="useremail" class="form-control" ng-model="recipevm.user.email" ng-pattern="emailFormat" placeholder="Email">
+            <input type="email" name="useremail" class="form-control" ng-model="uservm.user.email" ng-pattern="emailFormat" placeholder="Email">
             <span ng-show="signInForm.useremail.$invalid">Invalid field</span>
           </div>
 
           <div class="form-group">
-            <input type="password" name="userpassword" class="form-control" ng-model="recipevm.user.password" required placeholder="Password">
+            <input type="password" name="userpassword" class="form-control" ng-model="uservm.user.password" required placeholder="Password">
             <span ng-show="signInForm.userpassword.$error.required">Required field</span>
           </div>
 
           <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
         </form>
       </div>
-      <div class="col-sm-6 col-sm-offset-1">
+      <div class="col-sm-6 col-sm-offset-1" ng-controller="ControllerRecipe as recipevm2">
         <h3>Let's eat!</h3>
-        <ul class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes">
+        <ul class="ng-cloak recipe" ng-repeat="recipe in recipevm2.recipes">
           <li ng-bind="recipe.title" class="title"></li>
         </ul>
       </div>
@@ -51,6 +51,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.js"></script>
-  <script src="js/recipevm-controller.js"></script>
+  <script src="js/recipejs-app.js"></script>
 </body>
 </html>
