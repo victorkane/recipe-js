@@ -6,36 +6,40 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body ng-controller="RecipeVM as recipevm">
-  <h2 class="ng-cloak title">{{recipevm.message}} {{recipevm.user.name || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
-
-  <form ng-submit="recipevm.submit()" name="signInForm" class="container col-md-6" role="form">
-    <div class="form-group">
-      <label for="username">Name: </label>
-      <input type="text" name="username" class="form-control" ng-model="recipevm.user.name" required ng-minlength="4">
-      <span ng-show="signInForm.username.$error.required">Required field</span>
-      <span ng-show="signInForm.username.$error.minlength">Name should contain at least four characters</span>
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h2 class="ng-cloak title">{{recipevm.message}} {{recipevm.user.name || 'stranger'}} to {{recipevm.titletext}} {{recipevm.edition}} Edition</h2>
     </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <form ng-submit="recipevm.submit()" name="signInForm" class="" role="form">
+          <div class="form-group">
+            <input type="text" name="username" class="form-control" ng-model="recipevm.user.name" required ng-minlength="4" placeholder="Name">
+            <span ng-show="signInForm.username.$error.required">Required field</span>
+            <span ng-show="signInForm.username.$error.minlength">Name should contain at least four characters</span>
+          </div>
 
-    <div class="form-group">
-      <label for="useremail">Email: </label>
-      <input type="email" name="useremail" class="form-control" ng-model="recipevm.user.email" ng-pattern="emailFormat">
-      <span ng-show="signInForm.useremail.$invalid">Invalid field</span>
+          <div class="form-group">
+            <input type="email" name="useremail" class="form-control" ng-model="recipevm.user.email" ng-pattern="emailFormat" placeholder="Email">
+            <span ng-show="signInForm.useremail.$invalid">Invalid field</span>
+          </div>
+
+          <div class="form-group">
+            <input type="password" name="userpassword" class="form-control" ng-model="recipevm.user.password" required placeholder="Password">
+            <span ng-show="signInForm.userpassword.$error.required">Required field</span>
+          </div>
+
+          <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
+        </form>
+      </div>
+      <div class="col-sm-6 "
+        <h3 class="ng-cloak">Today's Recipe Recommendations</h3>
+        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
+          <span ng-bind="recipe.title" class="title"></span>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="userpassword">Password: </label>
-      <input type="password" name="userpassword" class="form-control" ng-model="recipevm.user.password" required>
-      <span ng-show="signInForm.userpassword.$error.required">Required field</span>
-    </div>
-
-    <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
-  </form>
-
-  <div class="container col-md-4 panel panel-primary"
-    <h3 class="ng-cloak">Today's Recipe Recommendations</h3>
-    <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
-      <span ng-bind="recipe.title" class="title"></span>
-    </div>
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.js"></script>
