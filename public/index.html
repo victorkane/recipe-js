@@ -11,9 +11,9 @@
       <div class="col-sm-6">
         <h2 class="ng-cloak title">{{headervm.message}} {{headervm.user.name || 'stranger'}} to {{headervm.titletext}} {{headervm.edition}} Edition</h2>
       </div>
-      <div class="col-sm-4 col-sm-offset-2" ng-controller="ControllerRecipe as recipevm">
+      <div class="col-sm-4 col-sm-offset-2">
         <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
-        <div class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes" ng-class="recipe.new ? 'new' : 'old'">
+        <div class="ng-cloak recipe" ng-repeat="recipe in headervm.list()" ng-class="recipe.new ? 'new' : 'old'">
           <span ng-bind="recipe.title" class="title"></span>
         </div>
       </div>
@@ -42,7 +42,7 @@
       </div>
       <div class="col-sm-6 col-sm-offset-1" ng-controller="ControllerRecipe as recipevm">
         <h3>Let's eat!</h3>
-        <ul class="ng-cloak recipe" ng-repeat="recipe in recipevm.recipes">
+        <ul class="ng-cloak recipe" ng-repeat="recipe in recipevm.list()">
           <li ng-bind="recipe.title" class="title"></li>
         </ul>
       </div>
