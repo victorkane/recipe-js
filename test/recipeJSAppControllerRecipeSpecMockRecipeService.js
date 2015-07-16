@@ -1,4 +1,4 @@
-describe('Service: RecipeService', function() {
+describe('Controller: ControllerRecipe with mocked service: RecipeService', function() {
   beforeEach(module('recipeJSApp'));
 
   var ctrl, mockRecipeService;
