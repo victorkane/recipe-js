@@ -35,8 +35,10 @@ vm.open = function(tab) {
   vm.tab = tab;
 };
 vm.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+vm.user = [];
 vm.submit = function() {
   console.log('User signed in: ', vm.user)
+  UserService.setCurrentUser(vm.user);
 };
 }])
 .factory('UserService', [function() {
@@ -46,13 +48,18 @@ vm.submit = function() {
     {email: 'mary@example.com', name: 'Mary McArthur', password: '11111111'},
     {email: 'judy@example.com', name: 'Judy Cromwell', password: 'fido'},
   ];
+  var currentUser = {};
   return {
     list: function() {
       return users;
     },
     add: function(user) {
       users.push(user);
-    }
+    },
+    setCurrentUser: function(user) {
+       currentUser = user;
+       console.log('currentUser signed in user is: ', currentUser)
+    },
   };
 }])
 .service('RecipeService', [RecipeService]);
