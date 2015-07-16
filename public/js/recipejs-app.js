@@ -43,6 +43,7 @@ vm.user = [];
 vm.submit = function() {
   console.log('User signed in: ', vm.user)
   UserService.setCurrentUser(vm.user);
+  vm.tab = 'off';
 };
 }])
 .factory('UserService', [function() {

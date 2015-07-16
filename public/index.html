@@ -22,7 +22,7 @@
     </div>
     <div class="row">
       <div class="col-sm-4 col-sm-offset-1" ng-controller="ControllerUser as uservm">
-        <ul class="nav nav-tabs">
+        <ul ng-show="uservm.tab != 'off'" class="nav nav-tabs">
           <li role="presentation" ng-class="uservm.tab == 'signin' ? 'active':'' "><button ng-click="uservm.open('signin')">Sign in</button></li>
           <li role="presentation" ng-class="uservm.tab == 'signup' ? 'active':'' "><button ng-click="uservm.open('signup')">Sign up</button></li>
         </ul>
