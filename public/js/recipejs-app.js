@@ -28,11 +28,31 @@ angular.module('recipeJSApp', [])
     return RecipeService.list();
   };
 }])
-.controller('ControllerUser', [function() {
+.controller('ControllerUser', ['UserService', function(UserService) {
 var vm = this;
+vm.tab = 'signin';
+vm.open = function(tab) {
+  vm.tab = tab;
+};
 vm.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
 vm.submit = function() {
   console.log('User signed in: ', vm.user)
 };
+}])
+.factory('UserService', [function() {
+  var users = [
+    {email: 'victorkane@example.com', name: 'Victor Kane', password: '123456'},
+    {email: 'henry@example.com', name: 'Henry James', password: 'abcdefg'},
+    {email: 'mary@example.com', name: 'Mary McArthur', password: '11111111'},
+    {email: 'judy@example.com', name: 'Judy Cromwell', password: 'fido'},
+  ];
+  return {
+    list: function() {
+      return users;
+    },
+    add: function(user) {
+      users.push(user);
+    }
+  };
 }])
 .service('RecipeService', [RecipeService]);
