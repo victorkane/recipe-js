@@ -13,13 +13,17 @@ function RecipeService() {
 }
 
 angular.module('recipeJSApp', [])
-.controller('ControllerHeader', ['RecipeService', function(RecipeService) {
+.controller('ControllerHeader', ['RecipeService', 'UserService', function(RecipeService, UserService) {
   var vm = this;
   vm.message = 'Welcome';
   vm.titletext = 'RecipeJS';
   vm.edition = 'First';
   vm.list = function() {
     return RecipeService.list();
+  };
+  vm.currentUserName = function() {
+    var cuser = UserService.getCurrentUser();
+    return cuser.name;
   };
 }])
 .controller('ControllerRecipe', ['RecipeService', function(RecipeService) {
@@ -55,6 +59,9 @@ vm.submit = function() {
     },
     add: function(user) {
       users.push(user);
+    },
+    getCurrentUser: function() {
+      return currentUser;
     },
     setCurrentUser: function(user) {
        currentUser = user;

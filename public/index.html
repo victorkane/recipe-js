@@ -9,8 +9,9 @@
   <div class="container-fluid">
     <div ng-controller="ControllerHeader as headervm" class="jumbotron container">
       <div class="col-sm-6">
-        <h2 class="ng-cloak title">{{headervm.message}} {{headervm.user.name || 'stranger'}} to {{headervm.titletext}} {{headervm.edition}} Edition</h2>
-        <p>Please sign in or sign up if you're not a member so you can share your best recipes with us!<p>
+        <h2 class="ng-cloak title">{{headervm.message}} {{headervm.currentUserName() || 'stranger'}} to {{headervm.titletext}} {{headervm.edition}} Edition</h2>
+        <p ng-hide="headervm.currentUserName()">Please sign in or sign up if you're not a member so you can share your best recipes with us!<p>
+        <p ng-show="headervm.currentUserName()">We'd love you to share your best recipes with us, {{headervm.currentUserName()}}!<p>
       </div>
       <div class="col-sm-4 col-sm-offset-2">
         <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
