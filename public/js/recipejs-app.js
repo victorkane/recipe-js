@@ -39,8 +39,9 @@ vm.open = function(tab) {
   vm.tab = tab;
 };
 vm.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-vm.user = [];
-vm.submit = function() {
+vm.user = {};
+vm.newuser = {};
+vm.signin = function() {
   // if email and password is matched, login ok
   var theUsers = UserService.list();
   //console.log(theUsers);
@@ -54,6 +55,18 @@ vm.submit = function() {
     console.log('No registered user for ', vm.user)
   }
 };
+vm.signup = function() {
+  var theUsers = UserService.list();
+  if (_.findIndex(theUsers, vm.newuser) < 0) {
+    UserService.add(vm.newuser);
+    console.log('User signed up: ', vm.newuser)
+    // reset form and model
+    vm.newuser = {};
+  }
+  else {
+    console.log('Registered user attempted to sign up', vm.newuser)
+  }
+};
 }])
 .factory('UserService', [function() {
   var users = [
@@ -65,10 +78,12 @@ vm.submit = function() {
   var currentUser = {};
   return {
     list: function() {
+      console.log('list: Users: ', users);
       return users;
     },
     add: function(user) {
       users.push(user);
+      console.log('add: Users: ', users);
     },
     getCurrentUser: function() {
       return currentUser;

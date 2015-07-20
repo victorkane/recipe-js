@@ -28,7 +28,7 @@
         </ul>
         <div ng-switch on="uservm.tab">
           <div ng-switch-when="signin">
-            <form ng-submit="uservm.submit()" name="signInForm" class="" role="form">
+            <form ng-submit="uservm.signin()" name="signInForm" class="" role="form">
               <div class="form-group">
                 <input type="text" name="username" class="form-control" ng-model="uservm.user.name" required ng-minlength="4" placeholder="Name">
                 <span ng-show="signInForm.username.$error.required">Required field</span>
@@ -49,7 +49,25 @@
             </form>
           </div>
           <div ng-switch-when="signup">
-            <p>sign up</p>
+            <form ng-submit="uservm.signup()" name="signUpForm" class="" role="form">
+              <div class="form-group">
+                <input type="text" name="username" class="form-control" ng-model="uservm.newuser.name" required ng-minlength="4" placeholder="Name">
+                <span ng-show="signUpForm.username.$error.required">Required field</span>
+                <span ng-show="signUpForm.username.$error.minlength">Name should contain at least four characters</span>
+              </div>
+
+              <div class="form-group">
+                <input type="email" name="useremail" class="form-control" ng-model="uservm.newuser.email" ng-pattern="emailFormat" placeholder="Email">
+                <span ng-show="signUpForm.useremail.$invalid">Invalid field</span>
+              </div>
+
+              <div class="form-group">
+                <input type="password" name="userpassword" class="form-control" ng-model="uservm.newuser.password" required placeholder="Password">
+                <span ng-show="signUpForm.userpassword.$error.required">Required field</span>
+              </div>
+
+              <input type="submit" value="Sign up" ng-disabled="signUpForm.$invalid">
+            </form>
           </div>
         </div>
       </div>
