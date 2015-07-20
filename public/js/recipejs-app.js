@@ -41,9 +41,18 @@ vm.open = function(tab) {
 vm.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
 vm.user = [];
 vm.submit = function() {
-  console.log('User signed in: ', vm.user)
-  UserService.setCurrentUser(vm.user);
-  vm.tab = 'off';
+  // if email and password is matched, login ok
+  var theUsers = UserService.list();
+  //console.log(theUsers);
+  if (_.findIndex(theUsers, vm.user) > -1) {
+    vm.tab = 'off';
+    UserService.setCurrentUser(vm.user);
+    console.log('User signed in: ', vm.user)
+  }
+  else {
+    vm.tab = 'signup';
+    console.log('No registered user for ', vm.user)
+  }
 };
 }])
 .factory('UserService', [function() {
