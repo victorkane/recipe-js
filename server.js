@@ -7,7 +7,14 @@ var uuid = require('node-uuid');
 
 var app = express()
 app.use(morgan('combined'))
-app.use(bodyParser());
+
+// deprecated
+// app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
 app.use(methodOverride());
 app.use(serveStatic(__dirname + '/public'))
 
