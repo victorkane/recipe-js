@@ -50,6 +50,13 @@ router.get('/users', function(req, res) {
   res.send(users);
 });
 
+router.post('/users', function(req, res) {
+  var user = req.body;
+  user.id = uuid.v1();
+  users.push(user);
+  res.send(user);
+})
+
 app.use('/api', router);
 
 var url = process.env.IP || '0.0.0.0'
