@@ -27,6 +27,13 @@ router.get('/recipes', function(req, res) {
   res.send(recipes);
 });
 
+router.post('/recipes', function(req, res) {
+  var recipe = req.body;
+  recipe.id = uuid.v1();
+  recipes.push(recipe);
+  res.send(recipe);
+})
+
 // user api
 var users = [
   {id: "6eaf0d90-306e-11e5-80b5-5b0f99bb025c",
