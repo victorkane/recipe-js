@@ -11,7 +11,7 @@
       <div class="col-sm-6">
         <h2 class="ng-cloak title">{{headervm.message}} {{headervm.currentUserName() || 'stranger'}} to {{headervm.titletext}} {{headervm.edition}} Edition</h2>
         <p ng-hide="headervm.currentUserName()">Please sign in or sign up if you're not a member so you can share your best recipes with us!<p>
-        <p ng-show="headervm.currentUserName()">We'd love you to share your best recipes with us, {{headervm.currentUserName()}}!<p>
+        <p ng-show="headervm.currentUserName()" class="header-message">We'd love you to share your best recipes with us, {{headervm.currentUserName()}}!<p>
       </div>
       <div class="col-sm-4 col-sm-offset-2">
         <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
@@ -28,24 +28,24 @@
         </ul>
         <div ng-switch on="uservm.tab">
           <div ng-switch-when="signin">
-            <form ng-submit="uservm.signin()" name="signInForm" class="" role="form">
+            <form ng-submit="uservm.signin()" name="signInForm" role="form">
               <div class="form-group">
-                <input type="text" name="username" class="form-control" ng-model="uservm.user.name" required ng-minlength="4" placeholder="Name">
+                <input type="text" name="username" class="username form-control" ng-model="uservm.user.name" required ng-minlength="4" placeholder="Name">
                 <span ng-show="signInForm.username.$error.required">Required field</span>
                 <span ng-show="signInForm.username.$error.minlength">Name should contain at least four characters</span>
               </div>
 
               <div class="form-group">
-                <input type="email" name="useremail" class="form-control" ng-model="uservm.user.email" ng-pattern="emailFormat" placeholder="Email">
+                <input type="email" name="useremail" class="usermail form-control" ng-model="uservm.user.email" ng-pattern="emailFormat" placeholder="Email">
                 <span ng-show="signInForm.useremail.$invalid">Invalid field</span>
               </div>
 
               <div class="form-group">
-                <input type="password" name="userpassword" class="form-control" ng-model="uservm.user.password" required placeholder="Password">
+                <input type="password" name="userpassword" class="userpassword form-control" ng-model="uservm.user.password" required placeholder="Password">
                 <span ng-show="signInForm.userpassword.$error.required">Required field</span>
               </div>
 
-              <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
+              <input type="submit" class="signin" value="Sign in" ng-disabled="signInForm.$invalid">
             </form>
           </div>
           <div ng-switch-when="signup">

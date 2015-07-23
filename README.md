@@ -6,9 +6,9 @@ Collect your recipes in the RecipeJS app online.
 * Install [NodeJS](https://nodejs.org/), which includes the Node Package Manager [NPM](https://www.npmjs.com/), by visiting the homepage and clicking on the install button in order to download and install the latest binary for your operating system.
 * Install the DVCS (distributed version control system) [Git](https://git-scm.com/) which also has binary packages for all operating systems on its homepage. Learn Git immediately by reading at least the first three chapters of the free online [Git Book](https://git-scm.com/book/en/v2)
 
-## Global dependencies for unit testing throughout the course
+## Global dependencies for testing throughout the course
 
-There will be more shortly, but this is enough to get started. Other tools (like the Karma test runner) are automatically included locally when you provision your static server with the `npm install` command (see below). But as we'll see it's convenient to install the karma command-line interface globally as well:
+Tools local to our app (like the Karma test runner) are automatically included locally when you provision your static server with the `npm install` command (see below). But as we'll see it's convenient to install the karma command-line interface globally as well:
 
 ````
 npm install -g karma-cli
@@ -21,6 +21,15 @@ And we'll install `bower`, another package manager very commonly used in JavaScr
 ````
 npm install -g bower
 ````
+
+And [Protractor](https://angular.github.io/protractor/#/)
+
+````
+npm install -g protractor
+webdriver-manager update
+````
+
+Note: Selenium assumes that you have a Java runtime installed.
 
 ## Instructions for reviewing each lesson's code.
 
