@@ -1,17 +1,3 @@
-function RecipeService() {
-  var recipes = [
-    {title: "Baked Beans on Toast", new: true},
-    {title: "French Toast", new: false},
-    {title: "Rocky Mountain Egg", new: false},
-  ];
-  this.list = function() {
-    return recipes;
-  };
-  this.add = function(recipe) {
-    recipes.push(recipe);
-  };
-}
-
 angular.module('recipeJSApp', [])
 .controller('ControllerHeader', ['RecipeService', 'UserService', function(RecipeService, UserService) {
   var vm = this;
@@ -94,4 +80,16 @@ vm.signup = function() {
     },
   };
 }])
-.service('RecipeService', [RecipeService]);
+.service('RecipeService', [function() {
+  var recipes = [
+    {title: "Baked Beans on Toast", new: true},
+    {title: "French Toast", new: false},
+    {title: "Rocky Mountain Egg", new: false},
+  ];
+  this.list = function() {
+    return recipes;
+  };
+  this.add = function(recipe) {
+    recipes.push(recipe);
+  };
+}]);
