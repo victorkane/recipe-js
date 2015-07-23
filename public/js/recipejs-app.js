@@ -11,6 +11,10 @@ angular.module('recipeJSApp', [])
     var cuser = UserService.getCurrentUser();
     return cuser.name;
   };
+  var init = function () {
+    RecipeService.getRecipes();
+  };
+  init();
 }])
 .controller('ControllerRecipe', ['RecipeService', function(RecipeService) {
   var vm = this;
@@ -81,11 +85,16 @@ vm.signup = function() {
   };
 }])
 .service('RecipeService', [function() {
-  var recipes = [
+  var recipesdb = [
     {title: "Baked Beans on Toast", new: true},
     {title: "French Toast", new: false},
     {title: "Rocky Mountain Egg", new: false},
   ];
+  var recipes = [];
+  this.getRecipes = function() {
+    recipes = recipesdb;
+    return recipes;
+  };
   this.list = function() {
     return recipes;
   };
