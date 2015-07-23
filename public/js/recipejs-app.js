@@ -5,7 +5,7 @@ angular.module('recipeJSApp', [])
   vm.titletext = 'RecipeJS';
   vm.edition = 'First';
   vm.list = function() {
-    return RecipeService.list();
+    return RecipeService.listRecipes();
   };
   vm.currentUserName = function() {
     var cuser = UserService.getCurrentUser();
@@ -19,7 +19,7 @@ angular.module('recipeJSApp', [])
 .controller('ControllerRecipe', ['RecipeService', function(RecipeService) {
   var vm = this;
   vm.list = function() {
-    return RecipeService.list();
+    return RecipeService.listRecipes();
   };
 }])
 .controller('ControllerUser', ['UserService', function(UserService) {
@@ -33,7 +33,7 @@ vm.user = {};
 vm.newuser = {};
 vm.signin = function() {
   // if email and password is matched, login ok
-  var theUsers = UserService.list();
+  var theUsers = UserService.listUsers();
   //console.log(theUsers);
   if (_.findIndex(theUsers, vm.user) > -1) {
     vm.tab = 'off';
@@ -46,9 +46,9 @@ vm.signin = function() {
   }
 };
 vm.signup = function() {
-  var theUsers = UserService.list();
+  var theUsers = UserService.listUsers();
   if (_.findIndex(theUsers, vm.newuser) < 0) {
-    UserService.add(vm.newuser);
+    UserService.addUser(vm.newuser);
     console.log('User signed up: ', vm.newuser)
     // reset form and model
     vm.newuser = {};
@@ -67,11 +67,11 @@ vm.signup = function() {
   ];
   var currentUser = {};
   return {
-    list: function() {
+    listUsers: function() {
       console.log('list: Users: ', users);
       return users;
     },
-    add: function(user) {
+    addUser: function(user) {
       users.push(user);
       console.log('add: Users: ', users);
     },
@@ -94,10 +94,10 @@ vm.signup = function() {
       console.error('recipes query error')
     });
   };
-  this.list = function() {
+  this.listRecipes = function() {
     return recipes;
   };
-  this.add = function(recipe) {
+  this.addRecipe = function(recipe) {
     recipes.push(recipe);
   };
 }]);
