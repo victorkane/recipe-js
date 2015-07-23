@@ -57,14 +57,13 @@ vm.signup = function() {
     console.log('Registered user attempted to sign up', vm.newuser)
   }
 };
+var init = function () {
+  UserService.getUsers();
+};
+init();
 }])
-.factory('UserService', [function() {
-  var users = [
-    {email: 'victorkane@example.com', name: 'Victor Kane', password: '123456'},
-    {email: 'henry@example.com', name: 'Henry James', password: 'abcdefg'},
-    {email: 'mary@example.com', name: 'Mary McArthur', password: '11111111'},
-    {email: 'judy@example.com', name: 'Judy Cromwell', password: 'fido'},
-  ];
+.factory('UserService', ['$http', function($http) {
+  var users = [];
   var currentUser = {};
   return {
     listUsers: function() {
@@ -82,6 +81,15 @@ vm.signup = function() {
        currentUser = user;
        console.log('currentUser signed in user is: ', currentUser)
     },
+    getUsers: function() {
+      $http.get('/api/users').then(function(res) {
+        users = res.data;
+        console.log('Grabbed users from back-end upon load');
+        console.log('Users: ', users);
+      }, function(errResponse) {
+        console.error('users query error')
+      });
+    }
   };
 }])
 .service('RecipeService', ['$http', function($http) {
