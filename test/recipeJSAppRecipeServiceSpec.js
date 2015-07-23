@@ -1,24 +1,21 @@
 describe('Service: RecipeService', function() {
   beforeEach(module('recipeJSApp'));
 
-  var service;
+  var service, mockRestfulAPI;
 
-  beforeEach(inject(function(RecipeService) {
+  beforeEach(inject(function(RecipeService, $httpBackend) {
+    mockRestfulAPI = $httpBackend;
+    mockRestfulAPI.expectGET('/api/recipes')
+      .respond([{id: '"f588d038-0cfd-4e4b-add7-959c332081bq"', title: 'Baked Beans', new: true}])
     service = RecipeService;
   }));
 
-  it('should return recipe database', function() {
-    expect(service.list()).toEqual([
-      {title: "Baked Beans on Toast", new: true},
-      {title: "French Toast", new: false},
-      {title: "Rocky Mountain Egg", new: false}
-    ]);
-  });
-
-  it('should add items', function() {
-    var newRecipe = {title: "Grilled Cheese Sandwich", new: true};
-    service.add(newRecipe);
-    var recipes = service.list();
-    expect(recipes[3]).toEqual(newRecipe);
+  it('should grab recipes from backend when asked', function() {
+    var r1 = service.listRecipes();
+    expect(r1).toEqual([]);
+    service.getRecipes();
+    mockRestfulAPI.flush();
+    var r2 = service.listRecipes();
+    expect(r2).toEqual([{id: '"f588d038-0cfd-4e4b-add7-959c332081bq"', title: 'Baked Beans', new: true}]);
   });
 });

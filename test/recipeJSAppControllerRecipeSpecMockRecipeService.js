@@ -5,7 +5,7 @@ describe('Controller: ControllerRecipe with mocked service: RecipeService', func
 
   beforeEach(module(function($provide) {
     mockRecipeService = {
-      list: function() {
+      listRecipes: function() {
         return [{title: "Mock Recipe", new: false}];
       }
     };
