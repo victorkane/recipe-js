@@ -84,16 +84,15 @@ vm.signup = function() {
     },
   };
 }])
-.service('RecipeService', [function() {
-  var recipesdb = [
-    {title: "Baked Beans on Toast", new: true},
-    {title: "French Toast", new: false},
-    {title: "Rocky Mountain Egg", new: false},
-  ];
+.service('RecipeService', ['$http', function($http) {
   var recipes = [];
   this.getRecipes = function() {
-    recipes = recipesdb;
-    return recipes;
+    $http.get('/api/recipes').then(function(res) {
+      console.log('Grabbed recipes from back-end upon load');
+      recipes = res.data;
+    }, function(errResponse) {
+      console.error('recipes query error')
+    });
   };
   this.list = function() {
     return recipes;
