@@ -32,6 +32,7 @@
     "gulp": "^3.9.0",
     "gulp-cachebust": "0.0.5",
     "gulp-concat": "^2.6.0",
+    "gulp-flatten": "^0.1.1",
     "gulp-install": "^0.4.0",
     "gulp-jshint": "^1.11.2",
     "gulp-karma": "0.0.4",
@@ -50,6 +51,7 @@
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.2.0",
     "phantomjs": "^1.9.17",
+    "run-sequence": "^1.1.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }

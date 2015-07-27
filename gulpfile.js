@@ -2,6 +2,7 @@ var gulp = require('gulp'),
 //    webserver = require('gulp-webserver'),
     del = require('del'),
     sass = require('gulp-sass'),
+    runSequence = require('run-sequence'),
     karma = require('gulp-karma'),
     jshint = require('gulp-jshint'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -10,8 +11,9 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     uglify = require('gulp-uglify'),
+    flatten = require('gulp-flatten'),
     gutil = require('gulp-util'),
-    nodemon = require('gulp-nodemon')
+    nodemon = require('gulp-nodemon'),
     ngAnnotate = require('browserify-ngannotate');
 
 var CacheBuster = require('gulp-cachebust');
@@ -24,9 +26,7 @@ var cachebust = new CacheBuster();
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('clean', function (cb) {
-    del([
-        'public'
-    ], cb);
+    del(['./public'], cb);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +42,25 @@ gulp.task('bower', function() {
     return gulp.src(['./bower.json'])
         .pipe(install());
 });
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// runs main bower files to install frontend dependencies in vendor dir
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+/*
+gulp.task('build-bower-files', function() {
+  return gulp.src(mainBowerFiles, {base: './bower_components'})
+    .pipe(gulp.dest('./public/vendor'));
+})
+*/
+gulp.task('copy-bower-components', function() {
+  gulp.src('./bower_components/**/*.min.js')
+  .pipe(flatten())
+  .pipe(gulp.dest('./public/vendor'))
+});
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -100,7 +119,7 @@ gulp.task('build-js', ['clean'], function() {
 //
 // Generates a sprite png and the corresponding sass sprite map.
 // This is not included in the recurring development build and needs to be run separately
-// Task copyimages should be removed from task dev and build
+// Task copy-images should be removed from task dev and build
 // if this task is to be used.
 //
 /////////////////////////////////////////////////////////////////////////////////////
@@ -125,20 +144,30 @@ gulp.task('sprite', function () {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('copyimages', function() {
+gulp.task('copy-images', function() {
   gulp.src('./src/images/**/*')
   .pipe(gulp.dest('./public/images'))
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// full build (except sprites), applies cache busting to the main page css and js bundles
+// full build (except sprites but including copy-images), applies cache busting to the main page css and js bundles
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-//gulp.task('build', [ 'clean', 'bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
-gulp.task('build', [ 'clean', 'bower','build-css',/* 'build-template-cache',*/ 'jshint', 'build-js'], function() {
-    return gulp.src('./src/index.html')
+gulp.task('build', function() {
+  return runSequence( 'clean',
+    // 'bower',
+    'build-css',
+    // 'build-template-cache',
+    'jshint',
+    'build-js',
+    'copy-bower-components',
+    'copy-images',
+    function() {
+      return gulp.src('index.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('public'));
+    }
+  )
 });
