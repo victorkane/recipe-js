@@ -56,7 +56,7 @@ gulp.task('build-bower-files', function() {
 })
 */
 gulp.task('copy-bower-components', function() {
-  gulp.src('./bower_components/**/*.min.js')
+  gulp.src('./bower_components/**/*.min.*')
   .pipe(flatten())
   .pipe(gulp.dest('./public/vendor'))
 });
@@ -68,7 +68,7 @@ gulp.task('copy-bower-components', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-css', ['clean'], function() {
+gulp.task('build-css', function() {
     return gulp.src('./src/styles/*')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -96,7 +96,7 @@ gulp.task('jshint', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-js', ['clean'], function() {
+gulp.task('build-js', function() {
     var b = browserify({
         entries: './src/js/recipejs-app.js',
         debug: true,
@@ -124,6 +124,7 @@ gulp.task('build-js', ['clean'], function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
+/*
 gulp.task('sprite', function () {
 
     var spriteData = gulp.src('./src/images/*.png')
@@ -137,6 +138,7 @@ gulp.task('sprite', function () {
     spriteData.css.pipe(gulp.dest('./dist'));
     spriteData.img.pipe(gulp.dest('./dist'))
 });
+*/
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -170,8 +172,8 @@ gulp.task('index', function() {
 gulp.task('build', function(cb) {
   return runSequence( 'clean',
     // 'bower',
-    'build-css',
     // 'build-template-cache',
+    'build-css',
     'jshint',
     'build-js',
     'copy-bower-components',
