@@ -38,23 +38,23 @@ vm.signin = function() {
   if (_.findIndex(theUsers, vm.user) > -1) {
     vm.tab = 'off';
     UserService.setCurrentUser(vm.user);
-    console.log('User signed in: ', vm.user)
+    console.log('User signed in: ', vm.user);
   }
   else {
     vm.tab = 'signup';
-    console.log('No registered user for ', vm.user)
+    console.log('No registered user for ', vm.user);
   }
 };
 vm.signup = function() {
   var theUsers = UserService.listUsers();
   if (_.findIndex(theUsers, vm.newuser) < 0) {
     UserService.addUser(vm.newuser);
-    console.log('User signed up: ', vm.newuser)
+    console.log('User signed up: ', vm.newuser);
     // reset form and model
     vm.newuser = {};
   }
   else {
-    console.log('Registered user attempted to sign up', vm.newuser)
+    console.log('Registered user attempted to sign up', vm.newuser);
   }
 };
 var init = function () {
@@ -72,7 +72,7 @@ init();
         console.log('Grabbed users from back-end');
         console.log('Users: ', users);
     }, function(errResponse) {
-      console.error('users query error')
+      console.error('users query error');
     });
   };
   return {
@@ -89,7 +89,7 @@ init();
     },
     setCurrentUser: function(user) {
        currentUser = user;
-       console.log('currentUser signed in user is: ', currentUser)
+       console.log('currentUser signed in user is: ', currentUser);
     },
     getUsers: function() {
       return grabUsers();
@@ -103,7 +103,7 @@ init();
       console.log('Grabbed recipes from back-end upon load');
       recipes = res.data;
     }, function(errResponse) {
-      console.error('recipes query error')
+      console.error('recipes query error');
     });
   };
   this.listRecipes = function() {
