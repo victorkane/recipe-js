@@ -151,11 +151,23 @@ gulp.task('copy-images', function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
+// Copies and cachebusts index.html
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('index', function() {
+  gulp.src('./src/index.html')
+  .pipe(cachebust.references())
+  .pipe(gulp.dest('public'));
+});
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
 // full build (except sprites but including copy-images), applies cache busting to the main page css and js bundles
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build', function() {
+gulp.task('build', function(cb) {
   return runSequence( 'clean',
     // 'bower',
     'build-css',
@@ -164,10 +176,7 @@ gulp.task('build', function() {
     'build-js',
     'copy-bower-components',
     'copy-images',
-    function() {
-      return gulp.src('index.html')
-        .pipe(cachebust.references())
-        .pipe(gulp.dest('public'));
-    }
+    'index',
+    cb
   )
 });
