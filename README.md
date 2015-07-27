@@ -38,8 +38,12 @@ Note: Selenium assumes that you have a Java runtime installed.
 git clone https://github.com/victorkane/recipe-js.git
 cd recipe-js/
 
-# Provision static server
+# Provision server-side, client-side and gulp automation dependencies
+#   by adding bower install as npm postinstall script
 npm install
+
+# Run automated build
+gulp build
 
 # Run server
 node server.js
@@ -60,8 +64,23 @@ After checking out branches involving changes to the NodeJS server `server.js` (
 
 ## Instructions for performing the local testing for each lesson's code
 
+### Unit tests
+
 ````
 # Install testing dependencies locally and start karma
-bower install
 karma start
+````
+
+### End-to-end testing
+
+In one terminal we start selenium:
+
+````
+webdriver-manager start
+````
+
+In another terminal we run the e2e tests:
+
+````
+protractor test/e2e/protractor.conf.js
 ````
