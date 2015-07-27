@@ -1,0 +1,17 @@
+/*
+ * We place the Angular cloaking styles outside of Angular so we don't see curly braces, etc. whle we are waiting for Angular to load
+ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+    .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.recipe {padding-left: 30px;}
+.new {background-image: url("../images/new.gif"); background-repeat: no-repeat;}
+
+li button {
+  color: #ccc;
+}
+li.active button {
+  color: #000;
+}
