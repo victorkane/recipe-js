@@ -1,3 +1,5 @@
+angular = require('angular');
+
 angular.module('recipeJSApp', [])
 .controller('ControllerHeader', ['RecipeService', 'UserService', function(RecipeService, UserService) {
   var vm = this;

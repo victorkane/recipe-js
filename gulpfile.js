@@ -25,7 +25,7 @@ var cachebust = new CacheBuster();
 
 gulp.task('clean', function (cb) {
     del([
-        'dist'
+        'public'
     ], cb);
 });
 
