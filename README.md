@@ -16,10 +16,11 @@ npm install -g karma-cli
 
 That way you don't have to execute `./node_modules/karma/bin/karma start` every time you run your tests. You can just do `karma`.
 
-And we'll install `bower`, another package manager very commonly used in JavaScript projects.
+And we'll install `bower`, another package manager very commonly used in JavaScript projects, together with a global installation of gulp, the streaming build tool, also.
 
 ````
 npm install -g bower
+npm install -g gulp
 ````
 
 And [Protractor](https://angular.github.io/protractor/#/)
