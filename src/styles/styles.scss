@@ -1,21 +1,32 @@
 /*
  * We place the Angular cloaking styles outside of Angular so we don't see curly braces, etc. whle we are waiting for Angular to load
  */
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
-    .ng-cloak, .x-ng-cloak {
-  display: none !important;
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
 }
 
+
+/* colors */
 $font-color-active-button: #000;
 $font-color-inactive-button: #ccc;
-
 li button {
-  color: $font-color-inactive-button;
+    color: $font-color-inactive-button;
 }
 
 li.active button {
-  color: $font-color-active-button
+    color: $font-color-active-button;
 }
 
-.recipe {padding-left: 30px;}
-.new {background-image: url("../images/new.gif"); background-repeat: no-repeat;}
+.recipe {
+    padding-left: 30px;
+}
+
+.new {
+    background-image: url("../images/new.gif");
+    background-repeat: no-repeat;
+}

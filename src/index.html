@@ -1,17 +1,19 @@
 <html ng-app="recipeJSApp">
+
 <head>
   <title>RecipeJS</title>
   <link rel="stylesheet" href="vendor/bootstrap.min.css">
   <link rel="stylesheet" href="vendor/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
   <div class="container-fluid">
     <div ng-controller="ControllerHeader as headervm" class="jumbotron container">
       <div class="col-sm-6">
         <h2 class="ng-cloak title">{{headervm.message}} {{headervm.currentUserName() || 'stranger'}} to {{headervm.titletext}} {{headervm.edition}} Edition</h2>
-        <p ng-hide="headervm.currentUserName()">Please sign-in or sign-up if you're not a member so you can share your best recipes with us!<p>
-        <p ng-show="headervm.currentUserName()" class="header-message">We'd love you to share your best recipes with us, {{headervm.currentUserName()}}!<p>
+        <p ng-hide="headervm.currentUserName()">Please sign-in or sign-up if you're not a member so you can share your best recipes with us!</p>
+        <p ng-show="headervm.currentUserName()" class="header-message">We'd love you to share your best recipes with us, {{headervm.currentUserName()}}!</p>
       </div>
       <div class="col-sm-4 col-sm-offset-2">
         <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
@@ -23,8 +25,12 @@
     <div class="row">
       <div class="col-sm-4 col-sm-offset-1" ng-controller="ControllerUser as uservm">
         <ul ng-show="uservm.tab != 'off'" class="nav nav-tabs">
-          <li role="presentation" ng-class="uservm.tab == 'signin' ? 'active':'' "><button ng-click="uservm.open('signin')">Sign in</button></li>
-          <li role="presentation" ng-class="uservm.tab == 'signup' ? 'active':'' "><button ng-click="uservm.open('signup')">Sign up</button></li>
+          <li role="presentation" ng-class="uservm.tab == 'signin' ? 'active':'' ">
+            <button ng-click="uservm.open('signin')">Sign in</button>
+          </li>
+          <li role="presentation" ng-class="uservm.tab == 'signup' ? 'active':'' ">
+            <button ng-click="uservm.open('signup')">Sign up</button>
+          </li>
         </ul>
         <div ng-switch on="uservm.tab">
           <div ng-switch-when="signin">
@@ -85,4 +91,5 @@
   <script src="vendor/lodash.min.js"></script>
   <script src="js/bundle.js"></script>
 </body>
+
 </html>
