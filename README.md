@@ -38,7 +38,8 @@ Note: Selenium assumes that you have a Java runtime installed.
 git clone https://github.com/victorkane/recipe-js.git
 cd recipe-js/
 
-# Provision static server
+# Provision static server and development dependencies
+export NODE_ENV=development
 npm install
 
 # Run server
