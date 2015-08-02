@@ -10,21 +10,21 @@ angular.module('RecipeJSApp', [
                 url: '/',
                 views: {
                     'header': {
-                        controller: 'HeaderCtrl',
+                        controller: 'HeaderCtrl as headerCtrl',
                         templateUrl: 'ngapp/header/header.tmpl.html'
                     },
                     'users': {
-                        controller: 'UsersCtrl',
+                        controller: 'UsersCtrl as usersCtrl',
                         templateUrl: 'ngapp/users/users.tmpl.html'
                     },
                     'recipes': {
-                        controller: 'RecipesCtrl',
+                        controller: 'RecipesCtrl as recipesCtrl',
                         templateUrl: 'ngapp/recipes/recipes.tmpl.html'
                     }
                 }
             });
-            // initial and fallback rewrite
-            $urlRouterProvider.otherwise('/');
+        // initial and fallback rewrite
+        $urlRouterProvider.otherwise('/');
     })
     .controller('HeaderCtrl', [function () {
         var headerCtrl = this;
