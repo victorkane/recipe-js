@@ -1,1 +1,4 @@
-<h1>Let's eat!</h1>
+<h3>Let's eat!</h3>
+<ul class="ng-cloak recipe" ng-repeat="recipe in recipesCtrl.list()">
+  <li ng-bind="recipe.title" class="title"></li>
+</ul
