@@ -4,17 +4,34 @@ angular.module('RecipeJSApp', [
         'recipes',
         'users'
     ])
-    .config(function ($stateProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('recipejs', {
-                url: '',
-                abstract: true
+                url: '/',
+                views: {
+                    'header': {
+                        controller: 'HeaderCtrl',
+                        templateUrl: 'ngapp/header/header.tmpl.html'
+                    },
+                    'users': {
+                        controller: 'UsersCtrl',
+                        templateUrl: 'ngapp/users/users.tmpl.html'
+                    },
+                    'recipes': {
+                        controller: 'RecipesCtrl',
+                        templateUrl: 'ngapp/recipes/recipes.tmpl.html'
+                    }
+                }
             });
+            // initial and fallback rewrite
+            $urlRouterProvider.otherwise('/');
     })
-    /*
-    .controller('RecipeJSCtrl', [function () {
-        var recipeJSCtrl = this;
+    .controller('HeaderCtrl', [function () {
+        var headerCtrl = this;
+    }])
+    .controller('UsersCtrl', [function () {
+        var usersCtrl = this;
+    }])
+    .controller('RecipesCtrl', [function () {
+        var recipesCtrl = this;
     }]);
-    */
-//    .controller('RecipeJSCtrl', [function() {
-//    }]);

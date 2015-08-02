@@ -1,3 +1,3 @@
 angular.module('recipes', [
-    'shared.recipes.service',
+    'shared.recipes.service'
 ]);
