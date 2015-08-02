@@ -1,0 +1,30 @@
+<html ng-app="RecipeJSApp">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>RecipeJS</title>
+  <link rel="stylesheet" href="vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body  ng-controller="RecipeJSCtrl as recipeJSCtrl">
+
+  <div class="container-fluid" ui-view></div>
+
+  <script src="vendor/jquery.min.js"></script>
+  <script src="vendor/bootstrap.min.js"></script>
+  <script src="vendor/lodash.min.js"></script>
+  <script src="vendor/angular.min.js"></script>
+  <script src="vendor/angular-ui-router.min.js"></script>
+  <script src="ngapp/recipejs-app.module.js"></script>
+  <script src="ngapp/header/header.module.js"></script>
+  <script src="ngapp/recipes/recipes.module.js"></script>
+  <script src="ngapp/users/users.module.js"></script>
+  <script src="ngapp/shared/recipes.service.js"></script>
+  <script src="ngapp/shared/users.service.js"></script>
+  
+</body>
+
+</html>
