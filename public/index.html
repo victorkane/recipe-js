@@ -9,10 +9,16 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body  ng-controller="RecipeJSCtrl as recipeJSCtrl">
+<body>
 
-  <div class="container-fluid" ui-view></div>
-
+  <div class="container-fluid" ui-view>
+    <div ng-controller="HeaderCtrl as headerCtrl" class="jumbotron container" ui-view="header">
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1" ng-controller="UsersCtrl as usersCtrl" ui-view="users">
+      </div>
+    </div>
+  </div>
   <script src="vendor/jquery.min.js"></script>
   <script src="vendor/bootstrap.min.js"></script>
   <script src="vendor/lodash.min.js"></script>
@@ -24,7 +30,7 @@
   <script src="ngapp/users/users.module.js"></script>
   <script src="ngapp/shared/recipes.service.js"></script>
   <script src="ngapp/shared/users.service.js"></script>
-  
+
 </body>
 
 </html>
