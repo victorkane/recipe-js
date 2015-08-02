@@ -5,14 +5,15 @@ angular.module('RecipeJSApp', [
         'users'
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
         $stateProvider
-            .state('home', {
+            .state('init', {
                 url: '/', // Make to navigate to index.html#/
                 templateUrl: 'ngapp/header/header.tmpl.html',
                 controller: 'RecipeJSCtrl'
             })
             ;
+        // initial and fallback redirect
+        $urlRouterProvider.otherwise('/');
     })
     .controller('RecipeJSCtrl', [function() {
         var recipeJSCtrl = this;
