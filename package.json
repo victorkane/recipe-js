@@ -28,6 +28,7 @@
   "devDependencies": {
     "del": "^1.2.0",
     "gulp": "^3.9.0",
+    "gulp-cachebust": "0.0.5",
     "gulp-concat": "^2.6.0",
     "gulp-inject": "^1.5.0",
     "gulp-jshint": "^1.11.2",
