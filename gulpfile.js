@@ -23,3 +23,11 @@ var cachebust = new CacheBuster();
  gulp.task('clean-prod', function (cb) {
     del(['./dist'], cb);
 });
+
+/*
+ * copying tasks
+ */
+ gulp.task('copy-bower-components-dev', function() {
+   gulp.src('./bower_components/**/*.min.*')
+   .pipe(gulp.dest('./public/vendor'))
+ });
