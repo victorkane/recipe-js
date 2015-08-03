@@ -38,6 +38,11 @@ gulp.task('copy-img-dev', function () {
         .pipe(gulp.dest('./public'))
 });
 
+gulp.task('copy-ngapp-js-dev', function () {
+    return gulp.src('./src/**/*.js')
+        .pipe(gulp.dest('./public'));
+})
+
 /*
  * Testing tasks
  */
