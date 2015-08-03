@@ -15,7 +15,7 @@ var CacheBuster = require('gulp-cachebust');
 var cachebust = new CacheBuster();
 
 /*
- * cleaning tasks
+ * Cleaning tasks
  */
 gulp.task('clean-dev', function (cb) {
     del(['./public'], cb);
@@ -26,7 +26,7 @@ gulp.task('clean-prod', function (cb) {
 });
 
 /*
- * copying tasks
+ * Copying tasks
  */
 gulp.task('copy-bower-components-dev', function () {
     gulp.src('./bower_components/**/*.min.*')
@@ -49,3 +49,12 @@ gulp.task('css-dev', function () {
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./public/css'));
 });
+
+/*
+ * Testing tasks
+ */
+ gulp.task('jshint', function() {
+     gulp.src('./src/ngapp/**/*.js')
+         .pipe(jshint())
+         .pipe(jshint.reporter('default'));
+ })
