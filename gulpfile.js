@@ -39,6 +39,15 @@ gulp.task('copy-img-dev', function () {
 });
 
 /*
+ * Testing tasks
+ */
+ gulp.task('jshint', function() {
+     gulp.src('./src/ngapp/**/*.js')
+         .pipe(jshint())
+         .pipe(jshint.reporter('default'));
+ })
+
+/*
  * CSS preprocessor tasks
  */
 gulp.task('css-dev', function () {
@@ -51,10 +60,13 @@ gulp.task('css-dev', function () {
 });
 
 /*
- * Testing tasks
+ * Build templates
  */
- gulp.task('jshint', function() {
-     gulp.src('./src/ngapp/**/*.js')
-         .pipe(jshint())
-         .pipe(jshint.reporter('default'));
+ gulp.task('build-templates', function () {
+     return gulp.src('./src/ngapp/**/*.tmpl.html')
+         .pipe(html2js({
+             moduleName: "templates-app"
+         }))
+         .pipe(concat('templates-app.js'))
+         .pipe(gulp.dest("./public/ngapp"));
  })
