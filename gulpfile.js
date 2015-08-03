@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     del = require('del'),
     sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
     runSequence = require('run-sequence'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
@@ -34,5 +35,17 @@ gulp.task('copy-bower-components-dev', function () {
 
 gulp.task('copy-img-dev', function () {
     gulp.src('./src/images')
-    .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('./public'))
+});
+
+/*
+ * CSS preprocessor tasks
+ */
+gulp.task('css-dev', function () {
+    return gulp.src('./src/styles/*')
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(cachebust.resources())
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(gulp.dest('./public/css'));
 });
