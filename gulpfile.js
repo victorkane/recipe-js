@@ -56,6 +56,20 @@ gulp.task('jshint', function () {
 })
 
 /*
+ * Just testing glob patterns 
+ */
+gulp.task('glob', function () {
+    var sources = gulp.src([
+            'public/vendor/**/*.js',
+            'public/ngapp/**/*.js',
+            'public/vendor/**/*.css',
+            'src/styles/**/*.scss'
+            'public/css/**/*.css'
+        ])
+        //.pipe(print());
+});
+
+/*
  * CSS preprocessor tasks
  */
 gulp.task('css-dev', function () {
@@ -114,19 +128,6 @@ gulp.task('index-dev', function () {
 });
 
 /*
- * Testing glob
- */
-gulp.task('glob', function () {
-    var sources = gulp.src([
-            'public/vendor/**/*.js',
-            'public/ngapp/**/*.js',
-            'public/vendor/**/*.css',
-            'public/css/**/*.css'
-        ])
-        //.pipe(print());
-})
-
-/*
  * Complete dev build task
  */
 gulp.task('dev', function (callback) {
@@ -140,4 +141,33 @@ gulp.task('dev', function (callback) {
         'index-dev',
         callback
     )
+});
+
+gulp.task('watch', function () {
+    gulp.watch('bower_componente/**/*', ['copy-bower-components-dev', 'index-dev']);
+    gulp.watch(['src/ngapp/**/*.js', '!src/**/ngapp/**/*.spec.js'], ['jshint', 'copy-ngapp-js-dev', 'index-dev']);
+    gulp.watch('src/ngapp/**/*.tmpl.html', ['build-templates', 'index-dev']);
+    gulp.watch('src/**/*.html', ['index-dev']);
+    gulp.watch('src/styles/**/*.scss', ['dev']);
+
+});
+
+gulp.task('serve', function () {
+    nodemon({
+            script: 'server.js',
+            watch: 'server.js'
+        })
+        .on('restart', function () {
+            console.log('restarted!')
+        })
+});
+
+/*
+ * call dev, watch and serve!
+ */
+gulp.task('dev-watch', function (callback) {
+    runSequence('dev',
+        'watch',
+        'serve',
+        callback);
 });
