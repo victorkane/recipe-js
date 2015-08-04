@@ -75,3 +75,31 @@ gulp.task('css-dev', function () {
          .pipe(concat('templates-app.js'))
          .pipe(gulp.dest("./public/ngapp"));
  })
+
+ /*
+  * Inject the ngapp js sources in the public npapp dire
+  * into the index.html
+  */
+ gulp.task('index-dev', function () {
+     return gulp.src('./src/index.html')
+         .pipe(inject(
+             gulp.src(['./public/ngapp/**/*.js', './public/css/**/*.css']), {
+                 ignorePath: 'public'
+             }))
+         .pipe(gulp.dest("./public"));
+ });
+
+/*
+ * Complete dev build task
+ */
+ gulp.task('build', function(callback) {
+   return runSequence( 'clean-dev',
+     'copy-bower-components-dev',
+     'copy-img-dev',
+     'css-dev',
+     'jshint',
+     'build-js',
+     'index',
+     callback
+   )
+ });
