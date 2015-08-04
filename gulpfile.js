@@ -19,12 +19,12 @@ var cachebust = new CacheBuster();
 /*
  * Cleaning tasks
  */
-gulp.task('clean-dev', function (cb) {
-    del(['./public'], cb);
+gulp.task('clean-dev', function (callback) {
+    del(['./public'], {force: true}, callback);
 });
 
-gulp.task('clean-prod', function (cb) {
-    del(['./dist'], cb);
+gulp.task('clean-prod', function (callback) {
+    del(['./dist'], {force: true}, callback);
 });
 
 /*
@@ -56,14 +56,14 @@ gulp.task('jshint', function () {
 })
 
 /*
- * Just testing glob patterns 
+ * Just testing glob patterns
  */
 gulp.task('glob', function () {
     var sources = gulp.src([
             'public/vendor/**/*.js',
             'public/ngapp/**/*.js',
             'public/vendor/**/*.css',
-            'src/styles/**/*.scss'
+            'src/styles/**/*.scss',
             'public/css/**/*.css'
         ])
         //.pipe(print());
@@ -76,7 +76,7 @@ gulp.task('css-dev', function () {
     return gulp.src('./src/styles/*')
         .pipe(sourcemaps.init())
         .pipe(sass())
-        .pipe(cachebust.resources())
+//        .pipe(cachebust.resources())
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./public/css'));
 });
@@ -148,7 +148,7 @@ gulp.task('watch', function () {
     gulp.watch(['src/ngapp/**/*.js', '!src/**/ngapp/**/*.spec.js'], ['jshint', 'copy-ngapp-js-dev', 'index-dev']);
     gulp.watch('src/ngapp/**/*.tmpl.html', ['build-templates', 'index-dev']);
     gulp.watch('src/**/*.html', ['index-dev']);
-    gulp.watch('src/styles/**/*.scss', ['dev']);
+    gulp.watch('src/styles/**/*.scss', ['css-dev']);
 
 });
 
