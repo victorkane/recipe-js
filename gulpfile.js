@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     html2js = require("gulp-ng-html2js"),
     print = require("gulp-print"),
     pkg = require('./package.json'),
+    browserSync = require('browser-sync');
     nodemon = require('gulp-nodemon');
 
 var CacheBuster = require('gulp-cachebust');
@@ -144,18 +145,32 @@ gulp.task('dev', function (callback) {
 });
 
 gulp.task('watch', function () {
-    gulp.watch('bower_componente/**/*', ['copy-bower-components-dev', 'index-dev']);
-    gulp.watch(['src/ngapp/**/*.js', '!src/**/ngapp/**/*.spec.js'], ['jshint', 'copy-ngapp-js-dev', 'index-dev']);
-    gulp.watch('src/ngapp/**/*.tmpl.html', ['build-templates', 'index-dev']);
-    gulp.watch('src/**/*.html', ['index-dev']);
-    gulp.watch('src/styles/**/*.scss', ['css-dev']);
+    gulp.watch('bower_componente/**/*', ['copy-bower-components-dev', 'index-dev']).on('change', browserSync.reload);
+    gulp.watch(['src/ngapp/**/*.js', '!src/**/ngapp/**/*.spec.js'], ['jshint', 'copy-ngapp-js-dev', 'index-dev']).on('change', browserSync.reload);
+    gulp.watch('src/ngapp/**/*.tmpl.html', ['build-templates', 'index-dev']).on('change', browserSync.reload);
+    gulp.watch('src/**/*.html', ['index-dev']).on('change', browserSync.reload);
+    gulp.watch('src/styles/**/*.scss', ['css-dev']).on('change', browserSync.reload);
 
 });
 
-gulp.task('serve', function () {
+gulp.task('browser-sync', function() {
+    browserSync({
+        proxy: "localhost:3000",
+        port: 8080
+    });
+});
+
+gulp.task('serve', function (callback) {
+    var called = false;
     nodemon({
             script: 'server.js',
             watch: 'server.js'
+        })
+        .on('start', function () {
+            if (!called) {
+                callback();
+            }
+            called = true;
         })
         .on('restart', function () {
             console.log('restarted!')
@@ -169,5 +184,6 @@ gulp.task('dev-watch', function (callback) {
     runSequence('dev',
         'watch',
         'serve',
+        'browser-sync',
         callback);
 });

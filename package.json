@@ -26,6 +26,7 @@
     "node-uuid": "^1.4.3"
   },
   "devDependencies": {
+    "browser-sync": "^2.8.2",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-cachebust": "0.0.5",
