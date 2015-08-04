@@ -11,7 +11,7 @@ var gulp = require('gulp'),
     html2js = require("gulp-ng-html2js"),
     print = require("gulp-print"),
     pkg = require('./package.json'),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
     nodemon = require('gulp-nodemon');
 
 var CacheBuster = require('gulp-cachebust');
@@ -21,11 +21,15 @@ var cachebust = new CacheBuster();
  * Cleaning tasks
  */
 gulp.task('clean-dev', function (callback) {
-    del(['./public'], {force: true}, callback);
+    del(['./public'], {
+        force: true
+    }, callback);
 });
 
 gulp.task('clean-prod', function (callback) {
-    del(['./dist'], {force: true}, callback);
+    del(['./dist'], {
+        force: true
+    }, callback);
 });
 
 /*
@@ -77,7 +81,7 @@ gulp.task('css-dev', function () {
     return gulp.src('./src/styles/*')
         .pipe(sourcemaps.init())
         .pipe(sass())
-//        .pipe(cachebust.resources())
+        //        .pipe(cachebust.resources())
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./public/css'));
 });
@@ -153,7 +157,7 @@ gulp.task('watch', function () {
 
 });
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
     browserSync({
         proxy: "localhost:3000",
         port: 8080
