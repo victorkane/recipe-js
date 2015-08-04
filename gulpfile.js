@@ -4,10 +4,12 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     runSequence = require('run-sequence'),
     jshint = require('gulp-jshint'),
+    order = require('gulp-order'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     inject = require("gulp-inject"),
     html2js = require("gulp-ng-html2js"),
+    print = require("gulp-print"),
     pkg = require('./package.json'),
     nodemon = require('gulp-nodemon');
 
@@ -34,8 +36,9 @@ gulp.task('copy-bower-components-dev', function () {
 });
 
 gulp.task('copy-img-dev', function () {
-    gulp.src('./src/images')
-        .pipe(gulp.dest('./public'))
+    gulp.src('src/images/*')
+        //.pipe(print())
+        .pipe(gulp.dest('public/images'))
 });
 
 gulp.task('copy-ngapp-js-dev', function () {
@@ -46,11 +49,11 @@ gulp.task('copy-ngapp-js-dev', function () {
 /*
  * Testing tasks
  */
- gulp.task('jshint', function() {
-     gulp.src('./src/ngapp/**/*.js')
-         .pipe(jshint())
-         .pipe(jshint.reporter('default'));
- })
+gulp.task('jshint', function () {
+    gulp.src('./src/ngapp/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+})
 
 /*
  * CSS preprocessor tasks
@@ -67,39 +70,74 @@ gulp.task('css-dev', function () {
 /*
  * Build templates
  */
- gulp.task('build-templates', function () {
-     return gulp.src('./src/ngapp/**/*.tmpl.html')
-         .pipe(html2js({
-             moduleName: "templates-app"
-         }))
-         .pipe(concat('templates-app.js'))
-         .pipe(gulp.dest("./public/ngapp"));
- })
+gulp.task('build-templates', function () {
+    return gulp.src('./src/ngapp/**/*.tmpl.html')
+        .pipe(html2js({
+            moduleName: "templates-app"
+        }))
+        .pipe(concat('templates-app.js'))
+        .pipe(gulp.dest("./public/ngapp"));
+})
 
- /*
-  * Inject the ngapp js sources in the public npapp dire
-  * into the index.html
-  */
- gulp.task('index-dev', function () {
-     return gulp.src('./src/index.html')
-         .pipe(inject(
-             gulp.src(['./public/ngapp/**/*.js', './public/css/**/*.css']), {
-                 ignorePath: 'public'
-             }))
-         .pipe(gulp.dest("./public"));
- });
+/*
+ * Inject the ngapp vendor js and css files
+ * in the public vendor dir into index.html
+ */
+gulp.task('index-dev', function () {
+    var target = gulp.src('./src/index.html');
+    var sources = gulp.src([
+            'public/vendor/**/*.js',
+            'public/ngapp/**/*.js',
+            'public/vendor/**/*.css',
+            'public/css/**/*.css'
+        ], {
+            read: false
+        })
+        //.pipe(print())
+        .pipe(order([
+            'public/vendor/jquery/dist/jquery.min.js',
+            'public/vendor/bootstrap/dist/js/bootstrap.min.js',
+            'public/vendor/angular/angular.min.js',
+            'public/vendor/angular-ui-router/release/angular-ui-router.min.js',
+            'public/vendor/**/*.min.js',
+            'public/ngapp/recipejs-app.module.js',
+            'public/ngapp/**/*.js',
+            'public/vendor/**/*.min.css'
+        ], {
+            // order docs recommend this for order to work
+            base: '.'
+        }));
+    return target.pipe(inject(sources, {
+            ignorePath: 'public'
+        }))
+        .pipe(gulp.dest("public"));
+});
+
+/*
+ * Testing glob
+ */
+gulp.task('glob', function () {
+    var sources = gulp.src([
+            'public/vendor/**/*.js',
+            'public/ngapp/**/*.js',
+            'public/vendor/**/*.css',
+            'public/css/**/*.css'
+        ])
+        //.pipe(print());
+})
 
 /*
  * Complete dev build task
  */
- gulp.task('build', function(callback) {
-   return runSequence( 'clean-dev',
-     'copy-bower-components-dev',
-     'copy-img-dev',
-     'css-dev',
-     'jshint',
-     'build-js',
-     'index',
-     callback
-   )
- });
+gulp.task('dev', function (callback) {
+    return runSequence('clean-dev',
+        'copy-bower-components-dev',
+        'copy-img-dev',
+        'css-dev',
+        'jshint',
+        'copy-ngapp-js-dev',
+        'build-templates',
+        'index-dev',
+        callback
+    )
+});

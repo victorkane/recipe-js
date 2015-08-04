@@ -2,7 +2,8 @@ angular.module('RecipeJSApp', [
         'ui.router',
         'header',
         'recipes',
-        'users'
+        'users',
+        'templates-app'
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -11,15 +12,15 @@ angular.module('RecipeJSApp', [
                 views: {
                     'header': {
                         controller: 'HeaderCtrl as headerCtrl',
-                        templateUrl: 'ngapp/header/header.tmpl.html'
+                        templateUrl: 'header/header.tmpl.html'
                     },
                     'users': {
                         controller: 'UsersCtrl as usersCtrl',
-                        templateUrl: 'ngapp/users/users.tmpl.html'
+                        templateUrl: 'users/users.tmpl.html'
                     },
                     'recipes': {
                         controller: 'RecipesCtrl as recipesCtrl',
-                        templateUrl: 'ngapp/recipes/recipes.tmpl.html'
+                        templateUrl: 'recipes/recipes.tmpl.html'
                     }
                 }
             });
