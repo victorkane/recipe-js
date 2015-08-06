@@ -3,11 +3,12 @@ angular.module('myrecipes', [
     ])
     .controller('MyRecipesCtrl', ['RecipeService', 'UserService', function (RecipeService, UserService) {
         var myRecipesCtrl = this;
+        myRecipesCtrl.cuser = '';
         myRecipesCtrl.list = function () {
-            return RecipeService.listRecipes();
+             return RecipeService.listRecipes();
         };
-        myRecipesCtrl.currentUserName = function () {
-            var cuser = UserService.getCurrentUser();
-            return cuser.name;
+        myRecipesCtrl.currentUserID = function () {
+            myRecipesCtrl.cuser = UserService.getCurrentUser();
+            return myRecipesCtrl.cuser.id;
         };
     }]);

@@ -14,10 +14,10 @@ angular.module('users', [
             // if email and password is matched, login ok
             var theUsers = UserService.listUsers();
             //console.log(theUsers);
-            if (_.findIndex(theUsers, usersCtrl.user) > -1) {
+            if ((userIndex = _.findIndex(theUsers, usersCtrl.user)) > -1) {
                 usersCtrl.tab = 'off';
-                UserService.setCurrentUser(usersCtrl.user);
-                console.log('User signed in: ', usersCtrl.user)
+                UserService.setCurrentUser(theUsers[userIndex]);
+                console.log('User signed in: ', theUsers[userIndex])
             } else {
                 usersCtrl.tab = 'signup';
                 console.log('No registered user for ', usersCtrl.user)

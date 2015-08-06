@@ -23,6 +23,16 @@ var router = express.Router();
 // recipe api
 var recipes = [{
     id: "f588d038-0cfd-4e4b-add7-959c332081bc",
+    userid: "ghqf0d90-306e-11e5-80b5-5b0f99bb025c",
+    title: "Cheese Omelette",
+    new: true
+}, {
+    id: "f588d038-0cfd-4e4b-add7-959c332081bc",
+    userid: "jaaf0d90-306e-11e5-80b5-5b0f99bb025c",
+    title: "Mushroom Omelette",
+    new: true
+}, {
+    id: "f588d038-0cfd-4e4b-add7-959c332081bc",
     userid: "6eaf0d90-306e-11e5-80b5-5b0f99bb025c",
     title: "Baked Beans on Toast",
     new: true
