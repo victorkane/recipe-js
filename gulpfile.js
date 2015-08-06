@@ -65,13 +65,14 @@ gulp.task('jshint', function () {
  */
 gulp.task('glob', function () {
     var sources = gulp.src([
-            'public/vendor/**/*.js',
-            'public/ngapp/**/*.js',
-            'public/vendor/**/*.css',
-            'src/styles/**/*.scss',
-            'public/css/**/*.css'
+        'src/ngapp/**/*.tmpl.html'
+        //    'public/vendor/**/*.js',
+        //    'public/ngapp/**/*.js',
+        //    'public/vendor/**/*.css',
+        //    'src/styles/**/*.scss',
+        //    'public/css/**/*.css'
         ])
-        //.pipe(print());
+        .pipe(print());
 });
 
 /*

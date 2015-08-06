@@ -3,6 +3,7 @@ angular.module('RecipeJSApp', [
         'header',
         'recipes',
         'users',
+        'myrecipes',
         'templates-app'
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -21,6 +22,10 @@ angular.module('RecipeJSApp', [
                     'recipes': {
                         controller: 'RecipesCtrl as recipesCtrl',
                         templateUrl: 'recipes/recipes.tmpl.html'
+                    },
+                    'myrecipes': {
+                        controller: 'MyRecipesCtrl as myRecipesCtrl',
+                        templateUrl: 'myrecipes/myrecipes.tmpl.html'
                     }
                 }
             });
