@@ -148,13 +148,14 @@ gulp.task('dev', function (callback) {
     )
 });
 
+// watch list
 gulp.task('watch', function () {
     gulp.watch('bower_componente/**/*', ['copy-bower-components-dev', 'index-dev']).on('change', browserSync.reload);
     gulp.watch(['src/ngapp/**/*.js', '!src/**/ngapp/**/*.spec.js'], ['jshint', 'copy-ngapp-js-dev', 'index-dev']).on('change', browserSync.reload);
     gulp.watch('src/ngapp/**/*.tmpl.html', ['build-templates', 'index-dev']).on('change', browserSync.reload);
     gulp.watch('src/**/*.html', ['index-dev']).on('change', browserSync.reload);
     gulp.watch('src/styles/**/*.scss', ['css-dev']).on('change', browserSync.reload);
-
+    gulp.watch('server.js', ['dev']).on('change', browserSync.reload);
 });
 
 gulp.task('browser-sync', function () {
