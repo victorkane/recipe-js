@@ -6,4 +6,5 @@
   <ul class="ng-cloak recipe" ng-repeat="recipe in myRecipesCtrl.myRecipes">
     <li ng-bind="recipe.title" class="title"></li>
   </ul>
+  <p ng-hide="myRecipesCtrl.myRecipes[0]">You haven't shared any recipes yet</p>
 </div>
