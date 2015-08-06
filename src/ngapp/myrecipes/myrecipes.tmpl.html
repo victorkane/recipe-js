@@ -1,6 +1,9 @@
 <div ng-show="myRecipesCtrl.currentUserID()">
   <h3>My Recipes</h3>
+  <!--
   <ul class="ng-cloak recipe" ng-repeat="recipe in myRecipesCtrl.list() | filter: {userid:myRecipesCtrl.cuser.id}">
+  -->
+  <ul class="ng-cloak recipe" ng-repeat="recipe in myRecipesCtrl.myRecipes">
     <li ng-bind="recipe.title" class="title"></li>
   </ul>
 </div>
