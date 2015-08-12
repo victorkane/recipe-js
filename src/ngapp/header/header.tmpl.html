@@ -1,12 +1,12 @@
 <div class="col-sm-6">
   <h2 class="ng-cloak title">{{headerCtrl.message}} {{headerCtrl.currentUserName() || 'stranger'}} to {{headerCtrl.titletext}} {{headerCtrl.edition}} Edition</h2>
-  <p ng-hide="headerCtrl.currentUserName()">Please sign in or sign up if you're not a member so you can share your best recipes with us!
+  <p ng-hide="headerCtrl.currentUserName()">Please sign-in or sign-up if you're not a member so you can share your best recipes with us!
   </p>
   <p ng-show="headerCtrl.currentUserName()" class="header-message">We'd love you to share your best recipes with us, {{headerCtrl.currentUserName()}}!
   </p>
 </div>
 <div class="col-sm-4 col-sm-offset-2">
-  <h4 class="ng-cloak">Today's Recipe Recommendations</h4>
+  <h4 class="ng-cloak">Today's Recipes</h4>
   <div class="ng-cloak recipe" ng-repeat="recipe in headerCtrl.list()" ng-class="recipe.new ? 'new' : 'old'">
     <span ng-bind="recipe.title" class="title"></span>
   </div>

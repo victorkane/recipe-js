@@ -75,6 +75,23 @@ gulp.task('glob', function () {
         .pipe(print());
 });
 
+
+/*
+ * Complete prod build task
+ */
+gulp.task('prod', function (callback) {
+    return runSequence('clean-prod',
+        'copy-bower-components-prod',
+        'copy-img-prod',
+        'css-prod',
+        'copy-ngapp-js-prod',
+        'build-templates',
+        'index-prod',
+        callback
+    )
+});
+
+
 /*
  * CSS preprocessor tasks
  */
