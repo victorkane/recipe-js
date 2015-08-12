@@ -10,7 +10,7 @@
     <span class="label">Name: </span>
     <input type="text" ng-model="recipevm.user.name" required ng-minlength="4">
     <span class="label">Email: </span>
-    <input type="email" ng-model="recipevm.user.email" ng-pattern="emailFormat">
+    <input type="email" ng-model="recipevm.user.email" required ng-pattern="emailFormat">
     <span class="label">Password: </span>
     <input type="password" ng-model="recipevm.user.password" required>
     <input type="submit" value="Sign in" ng-disabled="signInForm.$invalid">
