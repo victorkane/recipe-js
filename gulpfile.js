@@ -51,6 +51,11 @@ gulp.task('copy-ngapp-js-dev', function () {
         .pipe(gulp.dest('./public'));
 })
 
+gulp.task('copy-bower-components-prod', function () {
+    gulp.src('./bower_components/**/*.min.*')
+        .pipe(gulp.dest('./prod/vendor'))
+});
+
 gulp.task('copy-img-prod', function () {
     gulp.src('src/images/*')
         .pipe(gulp.dest('prod/images'))
@@ -70,7 +75,10 @@ gulp.task('jshint', function () {
  */
 gulp.task('glob', function () {
     var sources = gulp.src([
-        'src/ngapp/**/*.tmpl.html'
+//        'src/ngapp/**/*.tmpl.html',
+        //'./prod/**/*.js'
+        'public/vendor/**/*.js',
+        'public/ngapp/**/*.js'
         //    'public/vendor/**/*.js',
         //    'public/ngapp/**/*.js',
         //    'public/vendor/**/*.css',
@@ -87,20 +95,26 @@ gulp.task('prod', function (callback) {
     return runSequence(
         'dev',
         'clean-prod',
+        'copy-bower-components-prod',
         'copy-img-prod',
         'css-prod',
         'concat-js-prod',
-        'uglify-prod',
-//        'index-prod',
+//        'uglify-prod',
+        'index-prod',
         callback
     )
 });
 
 
 gulp.task('concat-js-prod', function () {
-    return gulp.src(['gulp/iife.prefix', 'public/ngapp/**/*.js', 'public/vendor/**/*.js','gulp/iife.suffix'])
+    return gulp.src(['gulp/iife.prefix', 'public/ngapp/**/*.js', 'gulp/iife.suffix'])
         .pipe(concat('ngapp.min.js'))
         .pipe(gulp.dest('./prod/js'))
+});
+
+gulp.task('uglify-prod', function () {
+    return gulp.src('prod/js/*.min.js')
+        .pipe(uglify());
 });
 
 /*
@@ -164,6 +178,37 @@ gulp.task('index-dev', function () {
             ignorePath: 'public'
         }))
         .pipe(gulp.dest("public"));
+});
+
+gulp.task('index-prod', function () {
+    var target = gulp.src('./src/index.html');
+    var sources = gulp.src([
+            'prod/vendor/**/*.min.css',
+            'prod/css/**/*.css',
+            'prod/vendor/**/*.js',
+            'prod/js/*.min.js'
+        ], {
+            read: false
+        })
+        //.pipe(print())
+        .pipe(order([
+            'prod/vendor/bootstrap/dist/css/bootstrap.min.css',
+            'prod/vendor/bootstrap/dist/css/bootstrap-theme.min.css',
+            'prod/css/*.css',
+            'prod/vendor/jquery/dist/jquery.min.js',
+            'prod/vendor/bootstrap/dist/js/bootstrap.min.js',
+            'prod/vendor/angular/angular.min.js',
+            'prod/vendor/angular-ui-router/release/angular-ui-router.min.js',
+            'prod/vendor/**/*.min.js',
+            'prod/js/*.min.js'
+        ], {
+            // order docs recommend this for order to work
+            base: '.'
+        }));
+    return target.pipe(inject(sources, {
+            ignorePath: 'prod'
+        }))
+        .pipe(gulp.dest("prod"));
 });
 
 /*
