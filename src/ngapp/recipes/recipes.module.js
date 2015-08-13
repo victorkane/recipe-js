@@ -6,4 +6,9 @@ angular.module('recipes', [
     recipesCtrl.list = function() {
         return RecipeService.listRecipes();
     }
+}])
+.directive('recipe', [function() {
+    return {
+        templateUrl: 'recipes/recipe.tmpl.html'
+    }
 }]);
