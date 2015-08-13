@@ -89,11 +89,18 @@ gulp.task('prod', function (callback) {
         'clean-prod',
         'copy-img-prod',
         'css-prod',
-//        'copy-ngapp-js-prod',
-//        'build-templates-prod',
+        'concat-js-prod',
+        'uglify-prod',
 //        'index-prod',
         callback
     )
+});
+
+
+gulp.task('concat-js-prod', function () {
+    return gulp.src(['gulp/iife.prefix', 'public/ngapp/**/*.js', 'public/vendor/**/*.js','gulp/iife.suffix'])
+        .pipe(concat('ngapp.min.js'))
+        .pipe(gulp.dest('./prod/js'))
 });
 
 /*
