@@ -35,9 +35,10 @@ gulp.task('clean-prod', function (callback) {
 /*
  * Copying tasks
  */
-gulp.task('copy-bower-components-dev', function () {
+gulp.task('copy-bower-components-dev', function (callback) {
     gulp.src('./bower_components/**/*.min.*')
         .pipe(gulp.dest('./public/vendor'))
+        .on('end', callback);
 });
 
 gulp.task('copy-img-dev', function () {

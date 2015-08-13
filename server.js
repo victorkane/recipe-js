@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(methodOverride());
-app.use(serveStatic(__dirname + '/prod'))
-//app.use(serveStatic(__dirname + '/public'))
+//app.use(serveStatic(__dirname + '/prod'))
+app.use(serveStatic(__dirname + '/public'))
 
 var router = express.Router();
 
