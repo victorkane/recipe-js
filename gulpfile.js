@@ -51,9 +51,10 @@ gulp.task('copy-ngapp-js-dev', function () {
         .pipe(gulp.dest('./public'));
 })
 
-gulp.task('copy-bower-components-prod', function () {
+gulp.task('copy-bower-components-prod', function (callback) {
     gulp.src('./bower_components/**/*.min.*')
         .pipe(gulp.dest('./prod/vendor'))
+        .on('end', callback);
 });
 
 gulp.task('copy-img-prod', function () {
@@ -99,7 +100,7 @@ gulp.task('prod', function (callback) {
         'copy-img-prod',
         'css-prod',
         'concat-js-prod',
-//        'uglify-prod',
+        'uglify-prod',
         'index-prod',
         callback
     )
