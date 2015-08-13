@@ -4,7 +4,8 @@
   <ul class="ng-cloak recipe" ng-repeat="recipe in myRecipesCtrl.list() | filter: {userid:myRecipesCtrl.cuser.id}">
   -->
   <ul class="ng-cloak recipe" ng-repeat="recipe in myRecipesCtrl.myRecipes">
-    <li ng-bind="recipe.title" class="title"></li>
+    <!-- <li ng-bind="recipe.title" class="title"></li> -->
+    <div recipe></div>
   </ul>
   <p ng-hide="myRecipesCtrl.myRecipes[0]">You haven't shared any recipes yet</p>
 </div>
