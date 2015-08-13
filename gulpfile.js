@@ -27,7 +27,7 @@ gulp.task('clean-dev', function (callback) {
 });
 
 gulp.task('clean-prod', function (callback) {
-    del(['./dist'], {
+    del(['./prod'], {
         force: true
     }, callback);
 });
@@ -50,6 +50,11 @@ gulp.task('copy-ngapp-js-dev', function () {
     return gulp.src('./src/**/*.js')
         .pipe(gulp.dest('./public'));
 })
+
+gulp.task('copy-img-prod', function () {
+    gulp.src('src/images/*')
+        .pipe(gulp.dest('prod/images'))
+});
 
 /*
  * Testing tasks
@@ -75,22 +80,21 @@ gulp.task('glob', function () {
         .pipe(print());
 });
 
-
 /*
  * Complete prod build task
  */
 gulp.task('prod', function (callback) {
-    return runSequence('clean-prod',
-        'copy-bower-components-prod',
+    return runSequence(
+        'dev',
+        'clean-prod',
         'copy-img-prod',
         'css-prod',
-        'copy-ngapp-js-prod',
-        'build-templates',
-        'index-prod',
+//        'copy-ngapp-js-prod',
+//        'build-templates-prod',
+//        'index-prod',
         callback
     )
 });
-
 
 /*
  * CSS preprocessor tasks
@@ -102,6 +106,11 @@ gulp.task('css-dev', function () {
         //        .pipe(cachebust.resources())
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('css-prod', function () {
+    gulp.src('public/css/*')
+        .pipe(gulp.dest('prod/css'))
 });
 
 /*
