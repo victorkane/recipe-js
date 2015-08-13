@@ -7,7 +7,7 @@
 </div>
 <div class="col-sm-4 col-sm-offset-2">
   <h4 class="ng-cloak">Today's Recipes</h4>
-  <div class="ng-cloak recipe" ng-repeat="recipe in headerCtrl.list()" ng-class="recipe.new ? 'new' : 'old'">
-    <span ng-bind="recipe.title" class="title"></span>
-  </div>
+  <ul class="ng-cloak recipe" ng-repeat="recipe in headerCtrl.list()" ng-class="recipe.new ? 'new' : 'old'">
+      <div recipe></div>
+  </ul>
 </div>

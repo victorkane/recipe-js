@@ -22,6 +22,10 @@ li.active button {
     color: $font-color-active-button;
 }
 
+ul.recipe li {
+   list-style-type: none;
+}
+
 .recipe {
     padding-left: 30px;
 }
