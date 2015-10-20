@@ -41,18 +41,18 @@ cd recipe-js/
 # Provision static server and development dependencies
 export NODE_ENV=development
 npm install
+bower install
 
+# [For versions that have a gulpfile and are not running on a server you can use browser-sync directly with your open browser and the app will come up automatically]
+gulp dev-watch
+
+# [For versions that have a gulpfile but are running on a server]
+gulp dev
 # Run server
 node server.js
 
-# Change to a branch lesson locally for the first time and run static server
-git checkout --track origin/lesson01-01
-node server.js
-
-# Change to an already downloaded branch
-git checkout lesson01-03
-node server.js
-
+# Change to a branch lesson locally
+git checkout lesson01-01
 ````
 
 ## Special note for lessons involving changes to NodeJS server
