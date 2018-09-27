@@ -57,7 +57,7 @@ git checkout lesson01-01
 
 ## Special note for lessons involving changes to NodeJS server
 
-After checking out branches involving changes to the NodeJS server `server.js` (for example, **branch lesson04-01** involves changes to the NodeJS server dependencies due to the implementation of the RESTful API), you will need to execute a one-time `npm update` to install them so the the server will work. If the server is running, stop it, do the `npm update` and start it up again with `node server.js`.
+After checking out branches involving changes to the NodeJS server `server.js` (for example, **branch lesson04-01** involves changes to the NodeJS server dependencies due to the implementation of the RESTful API), you will need to execute a one-time `npm update` to install them so the server will work. If the server is running, stop it, do the `npm update` and start it up again with `node server.js`.
 
 ## Instructions for performing the local testing for each lesson's code
 
